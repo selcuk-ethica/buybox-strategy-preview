@@ -3446,7 +3446,10 @@ textarea.form-control.emx-field:focus,
         s.classList.toggle('active', s.getAttribute('data-cat') === a.getAttribute('data-target'));
       });
       syncHead();
-      a.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      // On the swipeable strip, centre the chosen section so the edge fade never hides it.
+      if (navList.scrollWidth > navList.clientWidth) {
+        navList.scrollTo({ left: a.offsetLeft - navList.offsetLeft - (navList.clientWidth - a.offsetWidth) / 2, behavior: 'smooth' });
+      }
       setTimeout(syncHint, 350);
       document.getElementById('strategyPanel').scrollIntoView({ block: 'nearest' });
     });
