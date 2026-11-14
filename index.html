@@ -2733,12 +2733,51 @@ textarea.form-control.emx-field:focus,
   .rv-mobile .emx-settings-nav .list-group-item { width: auto; flex: 0 0 auto; white-space: nowrap; }
   .rv-mobile .emx-settings-nav__group-label { display: none; }
   .rv-mobile .emx-strategy-savebar__note { display: none; }
+  /* Header: strategy identity on one quiet line; the title is the open section. */
+  .emx-strategy-head__context { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .5rem; margin-bottom: .3rem;
+    font-size: .8125rem; color: var(--emx-settings-muted); }
+  .emx-strategy-head__name { color: var(--emx-settings-ink); font-weight: 600; }
+  .emx-strategy-chip { display: inline-block; margin-left: .4rem; padding: .05rem .5rem; border-radius: 999px; border: 1px solid var(--emx-settings-line);
+    background: var(--emx-settings-surface-soft); color: var(--emx-settings-muted); font-size: .7rem; font-weight: 500; line-height: 1.5; vertical-align: middle; }
+  .emx-strategy-chip--send { border-color: #bfdbfe; background: var(--emx-settings-accent-soft); color: var(--emx-settings-accent); }
+  .emx-strategy-nav-more { display: none; }
+  /* Phones and tablets: fade + arrow on the side that has more sections. */
+  @media (max-width: 991.98px) {
+    .emx-strategy-shell .emx-settings-nav { position: relative; }
+    .emx-strategy-shell .emx-settings-nav.has-more-right .list-group { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent); }
+    .emx-strategy-shell .emx-settings-nav.has-more-left .list-group { -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 3rem), transparent); mask-image: linear-gradient(to left, #000 calc(100% - 3rem), transparent); }
+    .emx-strategy-shell .emx-settings-nav.has-more-left.has-more-right .list-group { -webkit-mask-image: linear-gradient(to right, transparent, #000 3rem, #000 calc(100% - 3rem), transparent); mask-image: linear-gradient(to right, transparent, #000 3rem, #000 calc(100% - 3rem), transparent); }
+    .emx-strategy-shell .emx-strategy-nav-more { position: absolute; top: .55rem; z-index: 2; width: 1.75rem; height: 1.75rem; border-radius: 50%;
+      border: 1px solid var(--emx-settings-line); background: #fff; color: var(--emx-settings-ink-soft); box-shadow: 0 1px 3px rgba(17,24,39,.12);
+      align-items: center; justify-content: center; padding: 0; }
+    .emx-strategy-shell .emx-strategy-nav-more--next { right: 0; }
+    .emx-strategy-shell .emx-strategy-nav-more--prev { left: 0; }
+    .emx-strategy-shell .emx-settings-nav.has-more-right .emx-strategy-nav-more--next,
+    .emx-strategy-shell .emx-settings-nav.has-more-left .emx-strategy-nav-more--prev { display: inline-flex; }
+  }
+  .rv-mobile .emx-settings-nav { position: relative; }
+  .rv-mobile .emx-settings-nav.has-more-right .list-group { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent); }
+  .rv-mobile .emx-strategy-nav-more { position: absolute; top: .55rem; z-index: 2; width: 1.75rem; height: 1.75rem; border-radius: 50%; border: 1px solid #e5e7eb; background: #fff; align-items: center; justify-content: center; padding: 0; }
+  .rv-mobile .emx-strategy-nav-more--next { right: 0; }
+  .rv-mobile .emx-strategy-nav-more--prev { left: 0; }
+  .rv-mobile .emx-settings-nav.has-more-right .emx-strategy-nav-more--next, .rv-mobile .emx-settings-nav.has-more-left .emx-strategy-nav-more--prev { display: inline-flex; }
+  /* Desktop: about 10% less vertical space in the work panel. */
+  @media (min-width: 992px) {
+    .emx-strategy-shell .emx-settings-workspace-panel { padding: 1.2rem 1.5rem 1.35rem; }
+    .emx-strategy-shell .emx-settings-section { padding: 1.35rem 0 1.125rem; }
+    .emx-strategy-shell .emx-settings-section:first-child { padding-top: .35rem; }
+    .emx-strategy-shell .emx-settings-section__header { margin-bottom: .9rem; }
+    .emx-strategy-shell .emx-pref-row { padding: .85rem 0; }
+    .emx-strategy-shell .emx-settings-fields > .emx-pref-row:first-child, .emx-strategy-shell .emx-pref-deps > .emx-pref-row:first-child { padding-top: .1rem; }
+  }
+  /* With no section heading inside the panel, the first section starts at the panel's edge. */
+  .emx-strategy-shell .emx-settings-section:first-child { padding-top: .35rem; }
 </style>
 </head>
 <body>
 
 <div class="rv-bar">
-  <strong>Taslak</strong><span class="rv-note">Strateji sayfası · Ayarlar düzeni · örnek veriyle, bağlantısız önizleme</span>
+  <strong>Taslak</strong><span class="rv-note">Strateji sayfası · Ayarlar düzeni · örnek veriyle, bağlantısız önizleme · v2</span>
   <span class="rv-group">Ekran:
     <button type="button" data-mode="edit" class="on">Düzenle · #25 Genel</button>
     <button type="button" data-mode="create">Yeni strateji</button>
@@ -2761,13 +2800,16 @@ textarea.form-control.emx-field:focus,
     <header class="emx-settings-page-header">
       <div class="emx-strategy-head w-100">
         <div class="emx-settings-page-header__copy">
-          <div class="emx-strategy-head__crumb">Buybox › Stratejiler</div>
-          <h1 class="emx-settings-page-title"><span data-only="edit">Genel</span><span data-only="create">Yeni strateji</span></h1>
-          <div class="emx-settings-page-sub emx-strategy-head__meta" data-only="edit">
-            <span class="badge bg-green-lt">Aktif</span>
-            <span>Strateji #25 · Tüm ürünler · Öncelik 100 · Son değişiklik 03.10.2026 21:46</span>
+          <div class="emx-strategy-head__context">
+            <span>Buybox › Stratejiler ›</span>
+            <span class="emx-strategy-head__name" data-only="edit">Genel</span>
+            <span class="badge bg-green-lt" data-only="edit">Aktif</span>
+            <span data-only="edit">#25 · Tüm ürünler · Öncelik 100 · Son değişiklik 03.10.2026 21:46</span>
+            <span class="emx-strategy-head__name" data-only="create">Yeni strateji</span>
+            <span data-only="create">Boş bırakılan ayarlar varsayılan değeri kullanır.</span>
           </div>
-          <p class="emx-settings-page-sub" data-only="create">Bölümleri sırayla doldurun; boş bırakılan ayarlar varsayılan değeri kullanır.</p>
+          <h1 class="emx-settings-page-title" id="sectionTitle">Genel</h1>
+          <p class="emx-settings-page-sub" id="sectionSub">Strateji nerede ve nasıl fiyatlar.</p>
         </div>
         <a href="#" class="btn btn-outline-secondary btn-sm">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6l6 6"/></svg>
@@ -2778,7 +2820,9 @@ textarea.form-control.emx-field:focus,
 
     <div class="row g-3 g-lg-4 emx-settings-layout">
       <aside class="col-12 col-lg-3 emx-settings-layout__nav">
-        <nav class="emx-settings-nav profile-subnav" aria-label="Strateji bölümleri">
+        <nav class="emx-settings-nav profile-subnav" aria-label="Strateji bölümleri" id="strategyNavWrap">
+          <button type="button" class="emx-strategy-nav-more emx-strategy-nav-more--prev" aria-label="Önceki bölümler" tabindex="-1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6l6 6"/></svg></button>
+          <button type="button" class="emx-strategy-nav-more emx-strategy-nav-more--next" aria-label="Diğer bölümler" tabindex="-1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6l-6 6"/></svg></button>
           <div class="list-group list-group-flush" id="strategyNav">
             <a href="#genel" class="list-group-item list-group-item-action d-flex align-items-center active" data-target="genel">
               <span class="lg-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h8M16 6h4M4 12h2M10 12h10M4 18h10M18 18h2"/><circle cx="14" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="16" cy="18" r="2"/></svg></span>
@@ -2826,11 +2870,7 @@ textarea.form-control.emx-field:focus,
         <div class="emx-settings-workspace-panel" id="strategyPanel">
 
           <!-- 1. GENEL -->
-          <div id="sec-genel" class="hp-settings-section active" data-cat="genel">
-            <div class="emx-category-header"><div>
-              <h2 class="emx-category-header__title">Genel</h2>
-              <p class="emx-category-header__sub">Strateji nerede ve nasıl fiyatlar.</p>
-            </div></div>
+          <div id="sec-genel" class="hp-settings-section active" data-cat="genel" data-title="Genel" data-sub="Strateji nerede ve nasıl fiyatlar.">
             <div class="emx-category-stack">
               <section class="emx-settings-section">
                 <header class="emx-settings-section__header"><div>
@@ -2914,11 +2954,7 @@ textarea.form-control.emx-field:focus,
           </div>
 
           <!-- 2. BUYBOX BIZDEYKEN -->
-          <div id="sec-bizde" class="hp-settings-section" data-cat="bizde">
-            <div class="emx-category-header"><div>
-              <h2 class="emx-category-header__title">Buybox bizdeyken</h2>
-              <p class="emx-category-header__sub">Kazanırken ikinci satıcıyla aradaki fark ve fiyatın ne kadar yükselebileceği.</p>
-            </div></div>
+          <div id="sec-bizde" class="hp-settings-section" data-cat="bizde" data-title="Buybox bizdeyken" data-sub="Kazanırken ikinci satıcıyla aradaki fark ve fiyatın ne kadar yükselebileceği.">
             <div class="emx-category-stack">
               <section class="emx-settings-section">
                 <header class="emx-settings-section__header"><div><h3 class="emx-settings-section__title">Fark</h3></div></header>
@@ -2965,11 +3001,7 @@ textarea.form-control.emx-field:focus,
           </div>
 
           <!-- 3. BUYBOX BASKASINDAYKEN -->
-          <div id="sec-baskasinda" class="hp-settings-section" data-cat="baskasinda">
-            <div class="emx-category-header"><div>
-              <h2 class="emx-category-header__title">Buybox başkasındayken</h2>
-              <p class="emx-category-header__sub">Kaybederken fiyat nasıl iner ve ne zaman küçük bir artış denenir.</p>
-            </div></div>
+          <div id="sec-baskasinda" class="hp-settings-section" data-cat="baskasinda" data-title="Buybox başkasındayken" data-sub="Kaybederken fiyat nasıl iner ve ne zaman küçük bir artış denenir.">
             <div class="emx-category-stack">
               <section class="emx-settings-section">
                 <header class="emx-settings-section__header"><div><h3 class="emx-settings-section__title">Kazanana yaklaşma</h3></div></header>
@@ -3022,7 +3054,7 @@ textarea.form-control.emx-field:focus,
                     </div>
                     <div class="emx-pref-row emx-pref-row--nested">
                       <div class="emx-pref-row__copy"><div class="emx-pref-row__title">Eşik azaltımı</div>
-                        <p class="emx-pref-row__help">Deneme sırasında önemsiz fark eşiği bu kadar düşürülür.</p></div>
+                        <p class="emx-pref-row__help">Deneme sırasında fiyat değişikliği eşiği bu kadar düşürülür.</p></div>
                       <div class="emx-pref-row__control emx-pref-row__control--sm"><div class="input-group emx-field emx-field--currency"><input type="number" class="form-control" placeholder="0,02"><span class="input-group-text emx-field__affix">TL</span></div></div>
                     </div>
                     <div class="emx-pref-row emx-pref-row--nested">
@@ -3040,11 +3072,7 @@ textarea.form-control.emx-field:focus,
           </div>
 
           <!-- 4. FIYAT SINIRLARI -->
-          <div id="sec-sinirlar" class="hp-settings-section" data-cat="sinirlar">
-            <div class="emx-category-header"><div>
-              <h2 class="emx-category-header__title">Fiyat sınırları</h2>
-              <p class="emx-category-header__sub">Marj, taban fiyat ve bir turda ne kadar inilebileceği. Ürünün min/max fiyatı ayrıca her zaman geçerlidir.</p>
-            </div></div>
+          <div id="sec-sinirlar" class="hp-settings-section" data-cat="sinirlar" data-title="Fiyat sınırları" data-sub="Marj, taban fiyat ve bir turda ne kadar inilebileceği. Ürünün min/max fiyatı ayrıca her zaman geçerlidir.">
             <div class="emx-category-stack">
               <section class="emx-settings-section">
                 <header class="emx-settings-section__header"><div><h3 class="emx-settings-section__title">Marj ve taban</h3></div></header>
@@ -3068,8 +3096,8 @@ textarea.form-control.emx-field:focus,
                     <div class="emx-pref-row__control emx-pref-row__control--sm"><div class="input-group emx-field emx-field--currency"><input type="number" class="form-control" placeholder="Örn: 89,90"><span class="input-group-text emx-field__affix">TL</span></div></div>
                   </div>
                   <div class="emx-pref-row">
-                    <div class="emx-pref-row__copy"><div class="emx-pref-row__title">Önemsiz fark</div>
-                      <p class="emx-pref-row__help">Kazananla fark bundan küçükse fiyat değiştirilmez.</p></div>
+                    <div class="emx-pref-row__copy"><div class="emx-pref-row__title">Fiyat değişikliği eşiği</div>
+                      <p class="emx-pref-row__help">Karar verilirken: fiyatın kazanan satıcıya ya da hedef farka göre sapması bu tutardan küçükse fiyat değiştirilmez. Kuruş düzeyindeki gereksiz değişiklikleri önler.</p></div>
                     <div class="emx-pref-row__control emx-pref-row__control--sm"><div class="input-group emx-field emx-field--currency"><input type="number" class="form-control" value="1" data-create-value=""><span class="input-group-text emx-field__affix">TL</span></div></div>
                   </div>
                 </div></div>
@@ -3098,7 +3126,7 @@ textarea.form-control.emx-field:focus,
                 <div class="emx-settings-section__body"><div class="emx-settings-fields">
                   <div class="emx-pref-row">
                     <div class="emx-pref-row__copy"><div class="emx-pref-row__title">Gönderilecek en küçük değişiklik <span class="rv-tag">Önceden yalnız JSON'da</span></div>
-                      <p class="emx-pref-row__help">Bundan küçük fiyat değişiklikleri pazaryerine gönderilmez.</p></div>
+                      <p class="emx-pref-row__help">Gönderilirken: yeni fiyat mevcut fiyattan bu tutardan az farklıysa pazaryerine gönderilmez.</p></div>
                     <div class="emx-pref-row__control emx-pref-row__control--sm"><div class="input-group emx-field emx-field--currency"><input type="number" class="form-control" value="30" data-create-value=""><span class="input-group-text emx-field__affix">TL</span></div></div>
                   </div>
                 </div></div>
@@ -3107,11 +3135,7 @@ textarea.form-control.emx-field:focus,
           </div>
 
           <!-- 5. RAKIP KALITESI -->
-          <div id="sec-kalite" class="hp-settings-section" data-cat="kalite">
-            <div class="emx-category-header"><div>
-              <h2 class="emx-category-header__title">Rakip kalitesi</h2>
-              <p class="emx-category-header__sub">Puanı ya da kargo süresi bizden iyi olan rakibe karşı davranış.</p>
-            </div></div>
+          <div id="sec-kalite" class="hp-settings-section" data-cat="kalite" data-title="Rakip kalitesi" data-sub="Puanı ya da kargo süresi bizden iyi olan rakibe karşı davranış.">
             <div class="emx-category-stack">
               <section class="emx-settings-section">
                 <div class="emx-settings-section__body"><div class="emx-settings-fields">
@@ -3151,14 +3175,11 @@ textarea.form-control.emx-field:focus,
           </div>
 
           <!-- 6. PAZARYERLERI ARASI -->
-          <div id="sec-pazaryerleri" class="hp-settings-section" data-cat="pazaryerleri">
-            <div class="emx-category-header"><div>
-              <h2 class="emx-category-header__title">Pazaryerleri arası</h2>
-              <p class="emx-category-header__sub">Fiyat kararı başka pazaryerlerini ve mağazaları hesaba katsın mı.</p>
-            </div></div>
+          <div id="sec-pazaryerleri" class="hp-settings-section" data-cat="pazaryerleri" data-title="Pazaryerleri arası" data-sub="Fiyat kararı başka pazaryerlerini ve mağazaları hesaba katsın mı.">
             <div class="emx-category-stack">
               <section class="emx-settings-section">
-                <header class="emx-settings-section__header"><div><h3 class="emx-settings-section__title">Fiyat referansı</h3></div></header>
+                <header class="emx-settings-section__header"><div><h3 class="emx-settings-section__title">Fiyat referansı</h3>
+                  <p class="emx-settings-section__desc">Fiyat hesaplanırken hangi rakiplere bakılacağı. Yalnız bu ilanın fiyatını belirler; başka mağazaya fiyat göndermez.</p></div></header>
                 <div class="emx-settings-section__body"><div class="emx-settings-fields">
                   <div class="emx-pref-row">
                     <div class="emx-pref-row__copy"><div class="emx-pref-row__title">Rakiplere nereden bakılsın</div>
@@ -3181,11 +3202,12 @@ textarea.form-control.emx-field:focus,
                 </div></div>
               </section>
               <section class="emx-settings-section">
-                <header class="emx-settings-section__header"><div><h3 class="emx-settings-section__title">Diğer mağazalar</h3></div></header>
+                <header class="emx-settings-section__header"><div><h3 class="emx-settings-section__title">Mağazalar arası fiyatlama</h3>
+                  <p class="emx-settings-section__desc">İki ayrı işlem: başka bir mağazanın buybox verisini okuyup fiyatı ona göre hesaplamak, ya da hesaplanan fiyatı başka mağazalara da göndermek.</p></div></header>
                 <div class="emx-settings-section__body"><div class="emx-settings-fields">
                   <div class="emx-pref-row">
-                    <div class="emx-pref-row__copy"><div class="emx-pref-row__title">Başka mağazanın buybox'ını baz al</div>
-                      <p class="emx-pref-row__help">Bu stratejinin fiyatı seçilen mağazanın buybox verisine göre hesaplanır.</p></div>
+                    <div class="emx-pref-row__copy"><div class="emx-pref-row__title">Başka mağazanın buybox'ını baz al <span class="emx-strategy-chip">Okur</span></div>
+                      <p class="emx-pref-row__help">Fiyat, seçilen mağazanın buybox verisine göre hesaplanır. O mağazaya fiyat gönderilmez.</p></div>
                     <div class="emx-pref-row__control"><label class="form-check form-switch m-0"><input type="checkbox" class="form-check-input" data-deps="refStoreDeps"><span class="form-check-label"></span></label></div>
                   </div>
                   <div class="emx-pref-deps" id="refStoreDeps" hidden>
@@ -3195,8 +3217,8 @@ textarea.form-control.emx-field:focus,
                     </div>
                   </div>
                   <div class="emx-pref-row">
-                    <div class="emx-pref-row__copy"><div class="emx-pref-row__title">Fiyatı diğer mağazalara da gönder</div>
-                      <p class="emx-pref-row__help">Hesaplanan fiyat seçilen mağazalardaki aynı ürüne gönderilir; her mağazanın min/max koruması ayrı çalışır.</p></div>
+                    <div class="emx-pref-row__copy"><div class="emx-pref-row__title">Fiyatı diğer mağazalara da gönder <span class="emx-strategy-chip emx-strategy-chip--send">Gönderir</span></div>
+                      <p class="emx-pref-row__help">Hesaplanan fiyat seçilen mağazalardaki aynı ürüne de gönderilir; her mağazanın min/max koruması ayrı çalışır.</p></div>
                     <div class="emx-pref-row__control"><label class="form-check form-switch m-0"><input type="checkbox" class="form-check-input" data-deps="bcDeps"><span class="form-check-label"></span></label></div>
                   </div>
                   <div class="emx-pref-deps" id="bcDeps" hidden>
@@ -3219,11 +3241,7 @@ textarea.form-control.emx-field:focus,
           </div>
 
           <!-- 7. KAMPANYA VE KUSURAT -->
-          <div id="sec-kampanya" class="hp-settings-section" data-cat="kampanya">
-            <div class="emx-category-header"><div>
-              <h2 class="emx-category-header__title">Kampanya ve küsürat</h2>
-              <p class="emx-category-header__sub">Kampanyalı ilanlarda liste fiyatı ve fiyatın sonu.</p>
-            </div></div>
+          <div id="sec-kampanya" class="hp-settings-section" data-cat="kampanya" data-title="Kampanya ve küsürat" data-sub="Kampanyalı ilanlarda liste fiyatı ve fiyatın sonu.">
             <div class="emx-category-stack">
               <section class="emx-settings-section">
                 <header class="emx-settings-section__header"><div><h3 class="emx-settings-section__title">Kampanya</h3></div></header>
@@ -3276,11 +3294,7 @@ textarea.form-control.emx-field:focus,
           </div>
 
           <!-- 8. MAGAZAYA OZEL FARK -->
-          <div id="sec-magazaya-ozel" class="hp-settings-section" data-cat="magazaya-ozel">
-            <div class="emx-category-header"><div>
-              <h2 class="emx-category-header__title">Mağazaya özel fark</h2>
-              <p class="emx-category-header__sub">Kazanan ya da ikinci satıcı bu mağazalardan biriyse ona özel fark kullanılır; diğerleri varsayılan farkı kullanır.</p>
-            </div></div>
+          <div id="sec-magazaya-ozel" class="hp-settings-section" data-cat="magazaya-ozel" data-title="Mağazaya özel fark" data-sub="Kazanan ya da ikinci satıcı bu mağazalardan biriyse ona özel fark kullanılır; diğerleri varsayılan farkı kullanır.">
             <div class="emx-category-stack">
               <section class="emx-settings-section">
                 <div class="emx-settings-section__body">
@@ -3309,11 +3323,7 @@ textarea.form-control.emx-field:focus,
           </div>
 
           <!-- 9. GELISMIS -->
-          <div id="sec-gelismis" class="hp-settings-section" data-cat="gelismis">
-            <div class="emx-category-header"><div>
-              <h2 class="emx-category-header__title">Gelişmiş</h2>
-              <p class="emx-category-header__sub">Nadiren değişen ince ayarlar ve ham parametreler.</p>
-            </div></div>
+          <div id="sec-gelismis" class="hp-settings-section" data-cat="gelismis" data-title="Gelişmiş" data-sub="Nadiren değişen ince ayarlar ve ham parametreler.">
             <div class="emx-category-stack">
               <section class="emx-settings-section">
                 <header class="emx-settings-section__header"><div><h3 class="emx-settings-section__title">İnce ayarlar</h3></div></header>
@@ -3410,7 +3420,24 @@ textarea.form-control.emx-field:focus,
   var stage = document.getElementById('rvStage');
   var save = document.getElementById('saveBar');
 
-  // Section nav
+  // Section nav: the page title and its line follow the open section
+  var navWrap = document.getElementById('strategyNavWrap');
+  var navList = document.getElementById('strategyNav');
+  var syncHint = function () {
+    var max = navList.scrollWidth - navList.clientWidth;
+    navWrap.classList.toggle('has-more-right', max > 4 && navList.scrollLeft < max - 4);
+    navWrap.classList.toggle('has-more-left', max > 4 && navList.scrollLeft > 4);
+  };
+  navList.addEventListener('scroll', syncHint, { passive: true });
+  window.addEventListener('resize', syncHint);
+  navWrap.querySelector('.emx-strategy-nav-more--next').addEventListener('click', function () { navList.scrollBy({ left: navList.clientWidth * 0.6, behavior: 'smooth' }); });
+  navWrap.querySelector('.emx-strategy-nav-more--prev').addEventListener('click', function () { navList.scrollBy({ left: -navList.clientWidth * 0.6, behavior: 'smooth' }); });
+  var syncHead = function () {
+    var s = document.querySelector('#strategyPanel .hp-settings-section.active');
+    if (!s) return;
+    document.getElementById('sectionTitle').textContent = s.getAttribute('data-title');
+    document.getElementById('sectionSub').textContent = s.getAttribute('data-sub');
+  };
   document.querySelectorAll('#strategyNav [data-target]').forEach(function (a) {
     a.addEventListener('click', function (e) {
       e.preventDefault();
@@ -3418,7 +3445,9 @@ textarea.form-control.emx-field:focus,
       document.querySelectorAll('#strategyPanel .hp-settings-section').forEach(function (s) {
         s.classList.toggle('active', s.getAttribute('data-cat') === a.getAttribute('data-target'));
       });
+      syncHead();
       a.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      setTimeout(syncHint, 350);
       document.getElementById('strategyPanel').scrollIntoView({ block: 'nearest' });
     });
   });
@@ -3483,8 +3512,11 @@ textarea.form-control.emx-field:focus,
     b.addEventListener('click', function () {
       document.querySelectorAll('[data-width]').forEach(function (x) { x.classList.toggle('on', x === b); });
       stage.classList.toggle('rv-mobile', b.getAttribute('data-width') === 'mobile');
+      setTimeout(syncHint, 50);
     });
   });
+  syncHead();
+  syncHint();
 })();
 </script>
 </body>
